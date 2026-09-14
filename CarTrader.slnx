@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="CarTrader/CarTrader.csproj" />
+  <Project Path="Data/CarTrader.Data.csproj" />
+  <Project Path="Services/CarTrader.Services.csproj" />
 </Solution>
