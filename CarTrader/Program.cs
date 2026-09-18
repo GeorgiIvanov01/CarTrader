@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<CarTraderDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -31,7 +31,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Lockout.MaxFailedAccessAttempts = 50;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
 
-}) .AddEntityFrameworkStores<ApplicationDbContext>();
+}) .AddEntityFrameworkStores<CarTraderDbContext>();
 
 builder.Services.AddControllersWithViews();
 

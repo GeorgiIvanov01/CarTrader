@@ -1,5 +1,12 @@
 <Solution>
-  <Project Path="CarTrader/CarTrader.csproj" />
-  <Project Path="Data/CarTrader.Data.csproj" />
-  <Project Path="Services/CarTrader.Services.csproj" />
+  <Folder Name="/Data/">
+    <Project Path="Data/CarTrader.Data.csproj" />
+  </Folder>
+  <Folder Name="/Services/">
+    <Project Path="Services/CarTrader.Services.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="CarTrader/CarTrader.csproj" />
+  </Folder>
+  <Project Path="CarTrader.GCommon/CarTrader.GCommon.csproj" Id="b3af6060-1b43-4574-b13a-0a1629611ea7" />
 </Solution>
