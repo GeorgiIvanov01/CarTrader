@@ -6,7 +6,8 @@
     <Project Path="Services/CarTrader.Services.csproj" />
   </Folder>
   <Folder Name="/Web/">
-    <Project Path="CarTrader/CarTrader.csproj" />
+    <Project Path="CarTrader.ViewModels/CarTrader.Web.ViewModels.csproj" Id="457c0863-3230-4125-a648-29213ad4eac9" />
+    <Project Path="CarTrader/CarTrader.Web.csproj" />
   </Folder>
   <Project Path="CarTrader.GCommon/CarTrader.GCommon.csproj" Id="b3af6060-1b43-4574-b13a-0a1629611ea7" />
 </Solution>

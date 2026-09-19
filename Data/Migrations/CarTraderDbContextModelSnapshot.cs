@@ -4,7 +4,6 @@ using CarTrader.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarTrader.Data.Migrations
 {
     [DbContext(typeof(CarTraderDbContext))]
-    [Migration("20260918153451_InitialSeed")]
-    partial class InitialSeed
+    partial class CarTraderDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -373,16 +370,16 @@ namespace CarTrader.Data.Migrations
                             Id = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "55555555-5555-5555-5555-555555555555",
-                            Email = "user@cartrader.com",
+                            Email = "admin@cartrader.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "USER@CARTRADER.COM",
-                            NormalizedUserName = "USER@CARTRADER.COM",
+                            NormalizedEmail = "ADMIN@CARTRADER.COM",
+                            NormalizedUserName = "ADMIN@CARTRADER.COM",
                             PasswordHash = "AQAAAAEAAYagAAAAEAAAACAC8ObmFmbkWID8jZLZ2Lf/Is75PrJm1Yv4WsTKNzrsZa2Rt9alCLyjL7+sfRkQSpw=",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "44444444-4444-4444-4444-444444444444",
                             TwoFactorEnabled = false,
-                            UserName = "user@cartrader.com"
+                            UserName = "admin@cartrader.com"
                         });
                 });
 

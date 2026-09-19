@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarTrader.Data.Migrations
 {
     [DbContext(typeof(CarTraderDbContext))]
-    [Migration("20260917161807_InitialDbMigration")]
-    partial class InitialDbMigration
+    [Migration("20260918162036_InitialMigrationAndSeeding")]
+    partial class InitialMigrationAndSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,33 @@ namespace CarTrader.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sedan"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "SUV"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Truck"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Coupe"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Convertible"
+                        });
                 });
 
             modelBuilder.Entity("CarTrader.Data.Models.UserVehicle", b =>
@@ -125,6 +152,103 @@ namespace CarTrader.Data.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Vehicles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Condition = 3,
+                            Description = "Reliable midsize sedan with good fuel economy.",
+                            Doors = 2,
+                            EngineSize = 2500,
+                            FuelType = 0,
+                            ImageUrl = "https://example.com/images/toyota-camry-2020.jpg",
+                            IsDeleted = false,
+                            Make = "Toyota",
+                            Mileage = 25000,
+                            Model = "Camry",
+                            Price = 24000.0,
+                            SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            TransmissionType = 1,
+                            Year = 2020
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Condition = 2,
+                            Description = "Compact car with a sporty feel and low running costs.",
+                            Doors = 2,
+                            EngineSize = 2000,
+                            FuelType = 0,
+                            ImageUrl = "https://example.com/images/honda-civic-2019.jpg",
+                            IsDeleted = false,
+                            Make = "Honda",
+                            Mileage = 30000,
+                            Model = "Civic",
+                            Price = 20000.0,
+                            SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            TransmissionType = 0,
+                            Year = 2019
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 3,
+                            Condition = 1,
+                            Description = "Powerful pickup truck suitable for work and towing.",
+                            Doors = 2,
+                            EngineSize = 3500,
+                            FuelType = 4,
+                            ImageUrl = "https://example.com/images/ford-f150-2021.jpg",
+                            IsDeleted = false,
+                            Make = "Ford",
+                            Mileage = 15000,
+                            Model = "F-150",
+                            Price = 35000.0,
+                            SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            TransmissionType = 1,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Condition = 3,
+                            Description = "Full-size SUV with spacious interior and strong towing capacity.",
+                            Doors = 2,
+                            EngineSize = 5300,
+                            FuelType = 0,
+                            ImageUrl = "https://example.com/images/chevrolet-tahoe-2020.jpg",
+                            IsDeleted = false,
+                            Make = "Chevrolet",
+                            Mileage = 20000,
+                            Model = "Tahoe",
+                            Price = 50000.0,
+                            SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            TransmissionType = 1,
+                            Year = 2020
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 4,
+                            Condition = 1,
+                            Description = "High-performance coupe with track-capable handling.",
+                            Doors = 0,
+                            EngineSize = 3000,
+                            FuelType = 0,
+                            ImageUrl = "https://example.com/images/bmw-m4-2021.jpg",
+                            IsDeleted = false,
+                            Make = "BMW",
+                            Mileage = 10000,
+                            Model = "M4",
+                            Price = 70000.0,
+                            SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            TransmissionType = 2,
+                            Year = 2021
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -242,6 +366,24 @@ namespace CarTrader.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "55555555-5555-5555-5555-555555555555",
+                            Email = "admin@cartrader.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@CARTRADER.COM",
+                            NormalizedUserName = "ADMIN@CARTRADER.COM",
+                            PasswordHash = "AQAAAAEAAYagAAAAEAAAACAC8ObmFmbkWID8jZLZ2Lf/Is75PrJm1Yv4WsTKNzrsZa2Rt9alCLyjL7+sfRkQSpw=",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "44444444-4444-4444-4444-444444444444",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@cartrader.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

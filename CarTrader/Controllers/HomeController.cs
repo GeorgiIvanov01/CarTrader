@@ -1,4 +1,4 @@
-using CarTrader.Models;
+using CarTrader.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
