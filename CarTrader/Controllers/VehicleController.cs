@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarTrader.Web.Controllers
 {
-    public class VehicleController : Controller
+    [Authorize]
+    public class VehicleController : BaseController
     {
         public IActionResult Index()
         {
