@@ -1,0 +1,43 @@
+@model IEnumerable<CarTrader.Data.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "All Vehicles";
+    var categories = ViewBag.Categories as IEnumerable<CarTrader.Data.Models.Category>;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>All Vehicles</h1>
+    @if (User?.Identity?.IsAuthenticated == true)
+    {
+        <a asp-controller="Vehicle" asp-action="Create" class="btn btn-success">Create New Vehicle</a>
+    }
+</div>
+
+<div class="mb-3">
+    <form asp-controller="Vehicle" asp-action="Index" method="get" class="row g-2 align-items-center">
+        <div class="col-auto">
+            <select name="categoryId" class="form-select">
+                <option value="">All categories</option>
+                @if (categories != null)
+                {
+                    foreach (var c in categories)
+                    {
+                        <option value="@c.Id">@c.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var v in Model)
+    {
+        <div class="col-md-4">
+            @await Html.PartialAsync("_VehicleCard", v)
+        </div>
+    }
+</div>

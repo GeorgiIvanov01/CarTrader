@@ -1,0 +1,19 @@
+@model CarTrader.Data.Models.Vehicle
+
+<div class="card mb-3">
+    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Make @Model.Model" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Make @Model.Model (@Model.Year)</h5>
+        <p class="card-text">@Model.Price.ToString("C")</p>
+        <p class="card-text"><small class="text-muted">@Model.Mileage km · @Model.EngineSize cc</small></p>
+        <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+
+        @if (User?.Identity?.IsAuthenticated == true)
+        {
+            <form asp-controller="Vehicle" asp-action="AddFavorite" method="post" class="d-inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-outline-warning ms-2">Favorite</button>
+            </form>
+        }
+    </div>
+</div>
