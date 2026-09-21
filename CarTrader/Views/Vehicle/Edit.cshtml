@@ -1,4 +1,5 @@
-@model CarTrader.Data.Models.Vehicle
+@using CarTrader.Data.Enums
+@model EditViewModel
 
 @{
     ViewData["Title"] = "Edit Vehicle";
@@ -45,6 +46,29 @@
         <span asp-validation-for="EngineSize" class="text-danger"></span>
     </div>
 
+    <div class="row">
+        <div class="mb-3 col-md-3">
+            <label asp-for="Doors" class="form-label">Doors</label>
+            <select asp-for="Doors" class="form-select" asp-items="Html.GetEnumSelectList<DoorCount>()"></select>
+            <span asp-validation-for="Doors" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="FuelType" class="form-label">Fuel Type</label>
+            <select asp-for="FuelType" class="form-select" asp-items="Html.GetEnumSelectList<FuelType>()"></select>
+            <span asp-validation-for="FuelType" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="TransmissionType" class="form-label">Transmission</label>
+            <select asp-for="TransmissionType" class="form-select" asp-items="Html.GetEnumSelectList<TransmissionType>()"></select>
+            <span asp-validation-for="TransmissionType" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="Condition" class="form-label">Condition</label>
+            <select asp-for="Condition" class="form-select" asp-items="Html.GetEnumSelectList<VehicleCondition>()"></select>
+            <span asp-validation-for="Condition" class="text-danger"></span>
+        </div>
+    </div>
+
     <div class="mb-3">
         <label asp-for="ImageUrl" class="form-label"></label>
         <input asp-for="ImageUrl" class="form-control" />
@@ -53,9 +77,22 @@
 
     <div class="mb-3">
         <label asp-for="CategoryId" class="form-label">Category</label>
-        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategorySelectList">
-            <option value="">Select a category</option>
-        </select>
+        @if (Model.Categories != null)
+        {
+            <select asp-for="CategoryId" class="form-select">
+                <option value="">Select a category</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.Id" selected="@(Model.CategoryId == c.Id ? "selected" : null)">@c.Name</option>
+                }
+            </select>
+        }
+        else
+        {
+            <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategorySelectList">
+                <option value="">Select a category</option>
+            </select>
+        }
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 

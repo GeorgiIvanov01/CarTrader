@@ -1,4 +1,4 @@
-@model CarTrader.Data.Models.Vehicle
+@model DeleteViewModel
 
 @{
     ViewData["Title"] = "Delete Vehicle";
@@ -12,7 +12,6 @@
         <h5 class="card-title">@Model.Make @Model.Model (@Model.Year)</h5>
         <p class="card-text">@Model.Description</p>
         <p class="card-text"><strong>Price:</strong> @Model.Price.ToString("C")</p>
-        <p class="card-text"><strong>Seller:</strong> @Model.Seller?.UserName</p>
     </div>
 </div>
 

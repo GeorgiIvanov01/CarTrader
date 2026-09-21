@@ -1,8 +1,8 @@
-@model IEnumerable<CarTrader.Data.Models.Vehicle>
+@model IEnumerable<VehicleCardViewModel>
 
 @{
     ViewData["Title"] = "All Vehicles";
-    var categories = ViewBag.Categories as IEnumerable<CarTrader.Data.Models.Category>;
+    var categories = ViewBag.Categories as IEnumerable<CategoryViewModel>;
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">

@@ -1,4 +1,4 @@
-@model CarTrader.Data.Models.Vehicle
+@model DetailsViewModel
 
 @{
     ViewData["Title"] = "Vehicle Details";
@@ -33,10 +33,7 @@
             <dd class="col-sm-8">@Model.Condition</dd>
 
             <dt class="col-sm-4">Category</dt>
-            <dd class="col-sm-8">@Model.Category?.Name</dd>
-
-            <dt class="col-sm-4">Seller</dt>
-            <dd class="col-sm-8">@Model.Seller?.UserName</dd>
+            <dd class="col-sm-8">@Model.CategoryName</dd>
         </dl>
 
         <div class="mt-3">

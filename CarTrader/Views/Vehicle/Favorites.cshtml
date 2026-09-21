@@ -1,0 +1,26 @@
+@model IEnumerable<VehicleCardViewModel>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Your Favorites</h1>
+    <a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary">Back to All Vehicles</a>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">You have no favorite vehicles yet.</div>
+}
+else
+{
+    <div class="row">
+        @foreach (var v in Model)
+        {
+            <div class="col-md-4">
+                @await Html.PartialAsync("_VehicleCard", v)
+            </div>
+        }
+    </div>
+}
