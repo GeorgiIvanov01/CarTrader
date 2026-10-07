@@ -38,13 +38,9 @@
 
         <div class="mt-3">
             <a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary">Back</a>
-
-            @if (User?.Identity?.IsAuthenticated == true && !Model.IsOwner)
+            @if (Model.IsOwner)
             {
-                <form asp-controller="Vehicle" asp-action="AddFavorite" method="post" class="d-inline">
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    <button type="submit" class="btn btn-outline-warning ms-2">Add to Favorites</button>
-                </form>
+                <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger ms-2">Delete</a>
             }
         </div>
     </div>

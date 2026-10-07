@@ -1,4 +1,5 @@
 ﻿using CarTrader.Data;
+using CarTrader.Data.Models;
 using CarTrader.Services.Contracts;
 using CarTrader.Web.ViewModels.VehicleViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,45 @@ namespace CarTrader.Services
         public CarTraderService(CarTraderDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<CreateViewModel> GetCreateVehicleViewModelAsync()
+        {
+            IEnumerable<CategoryViewModel> categories = await _dbContext.Categories
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+            
+            CreateViewModel model = new CreateViewModel
+            {
+                Categories = categories
+            };
+            return model;
+        }
+
+        public async Task AddVehicleAsync(CreateViewModel model, string userId)
+        {
+            var vehicle = new Vehicle
+            {
+                Make = model.Make,
+                Model = model.Model,
+                Description = model.Description,
+                Price = model.Price,
+                Year = model.Year,
+                Mileage = model.Mileage,
+                EngineSize = model.EngineSize,
+                Doors = model.Doors,
+                FuelType = model.FuelType,
+                TransmissionType = model.TransmissionType,
+                Condition = model.Condition,
+                ImageUrl = model.ImageUrl,
+                CategoryId = model.CategoryId,
+                SellerId = userId
+            };
+            await _dbContext.Vehicles.AddAsync(vehicle);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<IndexViewModel>> GetAllVehiclesAsync(string? userId)
@@ -37,6 +77,52 @@ namespace CarTrader.Services
             return vehicles;
         }
 
+        public async Task SaveVehiclesAsync(int id, string userId)
+        {
+
+            if(await _dbContext.UserVehicles.AnyAsync(uv => uv.VehicleId == id && uv.UserId == userId))
+            {
+                return;
+            }
+
+            var userVehicle = new UserVehicle
+            {
+                VehicleId = id,
+                UserId = userId
+            };
+
+            await _dbContext.UserVehicles.AddAsync(userVehicle);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveVehicleAsync(int id, string userId)
+        {
+            var userVehicle = await _dbContext.UserVehicles.FirstOrDefaultAsync(uv => uv.VehicleId == id && uv.UserId == userId);
+
+            if (userVehicle == null)
+            {
+                return;
+            }
+            _dbContext.UserVehicles.Remove(userVehicle);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<FavoriteViewModel>> GetFavoriteVehiclesByUserIdAsync(string? userId)
+        {
+            return await _dbContext.UserVehicles
+                .Where(uv => uv.UserId == userId)
+                .Include(uv => uv.Vehicle)
+                .ThenInclude(v => v.Category)
+                .Select(uv => new FavoriteViewModel
+                {
+                    Id = uv.Vehicle.Id,
+                    Make = uv.Vehicle.Make,
+                    Model = uv.Vehicle.Model,
+                    Category = uv.Vehicle.Category.Name,
+                    ImageUrl = uv.Vehicle.ImageUrl
+                }).ToListAsync();
+        }
+
         public async Task<DetailsViewModel> GetVehicleDetailsByIdAsync(int vehicleId)
         {
             var vehicle = await _dbContext.Vehicles
@@ -60,15 +146,20 @@ namespace CarTrader.Services
                 ImageUrl = vehicle.ImageUrl,
                 Mileage = vehicle.Mileage,
                 EngineSize = vehicle.EngineSize,
-                Doors = vehicle.Doors.ToString(),// Assuming Doors is an integer, convert it to string
-                FuelType = vehicle.FuelType.ToString(),// Assuming FuelType is an enum, convert it to string
-                TransmissionType = vehicle.TransmissionType.ToString(),// Assuming TransmissionType is an enum, convert it to string
-                Condition = vehicle.Condition.ToString(),// Assuming Condition is an enum, convert it to string
+                Doors = vehicle.Doors.ToString(),
+                FuelType = vehicle.FuelType.ToString(),
+                TransmissionType = vehicle.TransmissionType.ToString(),
+                Condition = vehicle.Condition.ToString(),
                 CategoryName = vehicle.Category.Name,
-                IsOwner = false, // This will be set in the controller based on the current user
-                IsSaved = false // This will be set in the controller based on the current user
+                IsOwner = false,
+                IsSaved = false
             };
         }
+
+
+
+
+        //NOT IN USE, DELETE IF NOT NEEDED!
 
         public async Task<bool> IsVehicleOwnerAsync(int vehicleId, string userId)
         {
@@ -81,16 +172,18 @@ namespace CarTrader.Services
                 .AnyAsync(v => v.Id == vehicleId && v.SellerId == userId);
         }
 
-        public async Task<bool> IsVehicleSavedAsync(int vehicleId, string userId)
-        {
-            if (string.IsNullOrEmpty(userId))
-            {
-                return false;
-            }
+        //public async Task<bool> IsVehicleSavedAsync(int vehicleId, string userId)
+        //{
+        //    if (string.IsNullOrEmpty(userId))
+        //    {
+        //        return false;
+        //    }
 
-            return await _dbContext.UserVehicles
-                .AnyAsync(uv => uv.VehicleId == vehicleId && uv.UserId == userId);
-        }
+        //    return await _dbContext.UserVehicles
+        //        .AnyAsync(uv => uv.VehicleId == vehicleId && uv.UserId == userId);
+        //}
+
+
 
         // Not in use, delete if not needed!
         //public async Task<IEnumerable<UserVehicleViewModel>> GetVehiclesByUserIdAsync(string? userId)

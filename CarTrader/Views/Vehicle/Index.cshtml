@@ -9,7 +9,10 @@
     <h1>All Vehicles</h1>
     @if (User?.Identity?.IsAuthenticated == true)
     {
-        <a asp-controller="Vehicle" asp-action="Create" class="btn btn-success">Create New Vehicle</a>
+        <div>
+            <a asp-controller="Vehicle" asp-action="Favorites" class="btn btn-primary me-2">Favorites</a>
+            <a asp-controller="Vehicle" asp-action="Create" class="btn btn-success">Create New Vehicle</a>
+        </div>
     }
 </div>
 
