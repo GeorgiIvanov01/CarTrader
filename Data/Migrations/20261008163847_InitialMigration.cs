@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarTrader.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrationAndSeeding : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -236,7 +236,7 @@ namespace CarTrader.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 0, "55555555-5555-5555-5555-555555555555", "admin@cartrader.com", true, false, null, "ADMIN@CARTRADER.COM", "ADMIN@CARTRADER.COM", "AQAAAAEAAYagAAAAEAAAACAC8ObmFmbkWID8jZLZ2Lf/Is75PrJm1Yv4WsTKNzrsZa2Rt9alCLyjL7+sfRkQSpw=", null, false, "44444444-4444-4444-4444-444444444444", false, "admin@cartrader.com" });
+                values: new object[] { "2a1b3c4d-5e6f-4789-abcd-0123456789ab", 0, "c1d2e3f4-1234-4789-abcd-000000000002", "admin@cartrader.com", true, false, null, "ADMIN@CARTRADER.COM", "ADMIN@CARTRADER.COM", "AQAAAAIAAYagAAAAEFSRN8lEbQb3G0dJ+VJV+3pY3881Gwi9FK4kvg/37iOcpZ3ewJ05uemp0eIm7lXneA==", null, false, "a1b2c3d4-e5f6-4789-abcd-000000000001", false, "admin@cartrader.com" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -255,11 +255,11 @@ namespace CarTrader.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "Condition", "Description", "Doors", "EngineSize", "FuelType", "ImageUrl", "IsDeleted", "Make", "Mileage", "Model", "Price", "SellerId", "TransmissionType", "Year" },
                 values: new object[,]
                 {
-                    { 1, 1, 3, "Reliable midsize sedan with good fuel economy.", 2, 2500, 0, "https://example.com/images/toyota-camry-2020.jpg", false, "Toyota", 25000, "Camry", 24000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2020 },
-                    { 2, 1, 2, "Compact car with a sporty feel and low running costs.", 2, 2000, 0, "https://example.com/images/honda-civic-2019.jpg", false, "Honda", 30000, "Civic", 20000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 0, 2019 },
-                    { 3, 3, 1, "Powerful pickup truck suitable for work and towing.", 2, 3500, 4, "https://example.com/images/ford-f150-2021.jpg", false, "Ford", 15000, "F-150", 35000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2021 },
-                    { 4, 2, 3, "Full-size SUV with spacious interior and strong towing capacity.", 2, 5300, 0, "https://example.com/images/chevrolet-tahoe-2020.jpg", false, "Chevrolet", 20000, "Tahoe", 50000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2020 },
-                    { 5, 4, 1, "High-performance coupe with track-capable handling.", 0, 3000, 0, "https://example.com/images/bmw-m4-2021.jpg", false, "BMW", 10000, "M4", 70000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 2, 2021 }
+                    { 1, 1, 3, "Reliable midsize sedan with good fuel economy.", 2, 2500, 0, "https://media.ed.edmunds-media.com/toyota/camry/2020/oem/2020_toyota_camry_sedan_trd_fq_oem_1_500.jpg", false, "Toyota", 25000, "Camry", 24000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2020 },
+                    { 2, 1, 2, "Compact car with a sporty feel and low running costs.", 2, 2000, 0, "https://media.ed.edmunds-media.com/honda/civic/2019/oem/2019_honda_civic_4dr-hatchback_sport-touring_fq_oem_6_500.jpg", false, "Honda", 30000, "Civic", 20000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 0, 2019 },
+                    { 3, 3, 1, "Powerful pickup truck suitable for work and towing.", 2, 3500, 4, "https://media.ed.edmunds-media.com/ford/f-150/2021/oem/2021_ford_f-150_crew-cab-pickup_raptor_fq_oem_1_500.jpg", false, "Ford", 15000, "F-150", 35000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2021 },
+                    { 4, 2, 3, "Full-size SUV with spacious interior and strong towing capacity.", 2, 5300, 0, "https://media.ed.edmunds-media.com/chevrolet/tahoe/2026/oem/2026_chevrolet_tahoe_4dr-suv_z71_fq_oem_2_500.jpg", false, "Chevrolet", 20000, "Tahoe", 50000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 1, 2020 },
+                    { 5, 4, 1, "High-performance coupe with track-capable handling.", 0, 3000, 0, "https://media.ed.edmunds-media.com/bmw/m4/2026/oem/2026_bmw_m4_coupe_competition-xdrive_fq_oem_1_500.jpg", false, "BMW", 10000, "M4", 70000.0, "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 2, 2021 }
                 });
 
             migrationBuilder.CreateIndex(

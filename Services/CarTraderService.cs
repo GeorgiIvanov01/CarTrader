@@ -157,9 +157,152 @@ namespace CarTrader.Services
         }
 
 
+        public async Task<IEnumerable<UserVehicleViewModel>> GetVehiclesByUserIdAsync(string? userId)
+        {
+            var vehicles = await _dbContext.Vehicles
+                .Where(v => v.SellerId == userId && !v.IsDeleted)
+                .Include(v => v.Category)
+                .Include(v => v.UserVehicles)
+                .Select(v => new UserVehicleViewModel
+                {
+                    Id = v.Id,
+                    Make = v.Make,
+                    Model = v.Model,
+                    Year = v.Year,
+                    Price = v.Price,
+                    Mileage = v.Mileage,
+                    EngineSize = v.EngineSize,
+                    ImageUrl = v.ImageUrl,
+                    CategoryName = v.Category.Name
+
+                }).ToListAsync();
+
+            return vehicles;
+        }
 
 
-        //NOT IN USE, DELETE IF NOT NEEDED!
+        public async Task<DeleteViewModel> GetVehicleForDeleteByIdAsync(int vehicleId, string userId)
+        {
+            var vehicle = _dbContext.Vehicles
+                .Include(v => v.Seller)
+                .FirstOrDefault(v => v.Id == vehicleId && !v.IsDeleted);
+
+            if (vehicle == null)
+            {
+                throw new ArgumentException($"Vehicle not found.");
+            }
+
+            if (vehicle.SellerId != userId)
+            {
+                throw new UnauthorizedAccessException("You are not authorized to delete this vehicle.");
+            }
+
+            return new DeleteViewModel
+            {
+                Id = vehicle.Id,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Year = vehicle.Year,
+                Price = vehicle.Price,
+                Description = vehicle.Description,
+                ImageUrl = vehicle.ImageUrl
+            };
+        }
+
+
+        public async Task DeleteVehicleAsync(int vehicleId, string userId)
+        {
+            var vehicle = await _dbContext.Vehicles
+                .FirstOrDefaultAsync(v => v.Id == vehicleId && !v.IsDeleted);
+
+            if (vehicle == null)
+            {
+                throw new ArgumentException($"Vehicle not found.");
+            }
+
+            if (vehicle.SellerId != userId)
+            {
+                throw new UnauthorizedAccessException("You are not authorized to delete this vehicle.");
+            }
+
+            vehicle.IsDeleted = true;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<EditViewModel> GetVehicleForEditAsync(int id, string userId)
+        {
+            var vehicle = await _dbContext.Vehicles
+                .Include(v => v.Category)
+                .FirstOrDefaultAsync(v => v.Id == id && !v.IsDeleted);
+
+            if (vehicle == null)
+            {
+                throw new ArgumentException($"Vehicle not found.");
+            }
+
+            if (vehicle.SellerId != userId)
+            {
+                throw new UnauthorizedAccessException("You are not authorized to edit this vehicle.");
+            }
+
+            var categories = await _dbContext.Categories
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+
+            return new EditViewModel
+            {
+                Id = vehicle.Id,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                Description = vehicle.Description,
+                Price = vehicle.Price,
+                Year = vehicle.Year,
+                Mileage = vehicle.Mileage,
+                EngineSize = vehicle.EngineSize,
+                Doors = vehicle.Doors,
+                FuelType = vehicle.FuelType,
+                TransmissionType = vehicle.TransmissionType,
+                Condition = vehicle.Condition,
+                ImageUrl = vehicle.ImageUrl,
+                CategoryId = vehicle.CategoryId,
+                Categories = categories
+            };
+        }
+
+        public async Task EditVehicleAsync(EditViewModel model, string userId)
+        {
+            var vehicle = await _dbContext.Vehicles
+                .FirstOrDefaultAsync(v => v.Id == model.Id && !v.IsDeleted);
+
+            if (vehicle == null)
+            {
+                throw new ArgumentException($"Vehicle not found.");
+            }
+
+            if (vehicle.SellerId != userId)
+            {
+                throw new UnauthorizedAccessException("You are not authorized to edit this vehicle.");
+            }
+
+            vehicle.Make = model.Make;
+            vehicle.Model = model.Model;
+            vehicle.Description = model.Description;
+            vehicle.Price = model.Price;
+            vehicle.Year = model.Year;
+            vehicle.Mileage = model.Mileage;
+            vehicle.EngineSize = model.EngineSize;
+            vehicle.Doors = model.Doors;
+            vehicle.FuelType = model.FuelType;
+            vehicle.TransmissionType = model.TransmissionType;
+            vehicle.Condition = model.Condition;
+            vehicle.ImageUrl = model.ImageUrl;
+            vehicle.CategoryId = model.CategoryId;
+
+            await _dbContext.SaveChangesAsync();
+        }
 
         public async Task<bool> IsVehicleOwnerAsync(int vehicleId, string userId)
         {
@@ -172,6 +315,7 @@ namespace CarTrader.Services
                 .AnyAsync(v => v.Id == vehicleId && v.SellerId == userId);
         }
 
+
         //public async Task<bool> IsVehicleSavedAsync(int vehicleId, string userId)
         //{
         //    if (string.IsNullOrEmpty(userId))
@@ -181,33 +325,6 @@ namespace CarTrader.Services
 
         //    return await _dbContext.UserVehicles
         //        .AnyAsync(uv => uv.VehicleId == vehicleId && uv.UserId == userId);
-        //}
-
-
-
-        // Not in use, delete if not needed!
-        //public async Task<IEnumerable<UserVehicleViewModel>> GetVehiclesByUserIdAsync(string? userId)
-        //{
-
-        //    var vehicles = await _dbContext.Vehicles
-        //        .Where(v => v.SellerId == userId && !v.IsDeleted)
-        //        .Include(v => v.Category)
-        //        .Include(v => v.UserVehicles)
-        //        .Select(v => new UserVehicleViewModel
-        //        {
-        //            Id = v.Id,
-        //            Make = v.Make,
-        //            Model = v.Model,
-        //            Year = v.Year,
-        //            Price = v.Price,
-        //            Mileage = v.Mileage,
-        //            EngineSize = v.EngineSize,
-        //            ImageUrl = v.ImageUrl,
-        //            CategoryName = v.Category.Name
-
-        //        }).ToListAsync();
-
-        //    return vehicles;
         //}
     }
 }

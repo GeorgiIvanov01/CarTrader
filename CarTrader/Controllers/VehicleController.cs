@@ -20,6 +20,7 @@ namespace CarTrader.Web.Controllers
         }
 
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             string? userId = GetUserId();
@@ -54,6 +55,118 @@ namespace CarTrader.Web.Controllers
 
             await _carTraderService.AddVehicleAsync(viewModel, userId);
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> MyVehicles (string Id)
+        {
+            string? userId = GetUserId();
+
+            if(string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(await _carTraderService.GetVehiclesByUserIdAsync(userId));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            string? userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var vehicle = await _carTraderService.GetVehicleForDeleteByIdAsync(id, userId);
+
+            return View(vehicle);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            string? userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            try
+            {
+                await _carTraderService.DeleteVehicleAsync(id, userId);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("MyVehicles");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            string? userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            try 
+            {
+                var model = await _carTraderService.GetVehicleForEditAsync(id, userId);
+                return View(model);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditViewModel viewModel)
+        {
+            string? userId = GetUserId();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            try
+            {
+                await _carTraderService.EditVehicleAsync(viewModel, userId);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized();
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("MyVehicles");
         }
 
         public async Task<IActionResult> Favorites()

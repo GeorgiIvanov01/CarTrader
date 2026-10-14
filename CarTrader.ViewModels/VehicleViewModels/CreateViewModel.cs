@@ -49,8 +49,9 @@ namespace CarTrader.Web.ViewModels.VehicleViewModels
         [StringLength(VehicleImageUrlMaxLength, MinimumLength = VehicleImageUrlMinLength)]
         public string? ImageUrl { get; set; }
 
-        [Required]
+        public bool IsDeleted { get; set; } = false;
 
+        [Required]
         public int CategoryId { get; set; }
         public IEnumerable<CategoryViewModel>? Categories { get; set; }
     }

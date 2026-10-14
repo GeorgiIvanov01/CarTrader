@@ -22,7 +22,7 @@ namespace CarTrader.Web.ViewModels.VehicleViewModels
 
         [Required]
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [Required]
         [Range(VehicleYearMinValue, VehicleYearMaxValue, ErrorMessage = "Year is not valid.")]

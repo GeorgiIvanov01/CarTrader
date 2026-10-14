@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CarTrader.Data.Models;
 using CarTrader.Data.Enums;
 using Microsoft.AspNetCore.Identity;
-using static CarTrader.GCommon.InitialIdentitySeedConstants;
+// Identity seed constants are provided inline below for the default admin user.
 
 namespace CarTrader.Data
 {
@@ -42,18 +42,39 @@ namespace CarTrader.Data
                 .HasForeignKey(v => v.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<IdentityUser>().HasData(new IdentityUser
+            //builder.Entity<IdentityUser>().HasData(new IdentityUser
+            //{
+            //    Id = DefaultUserId,
+            //    UserName = DefaultUserEmail,
+            //    NormalizedUserName = DefaultUserEmail.ToUpperInvariant(),
+            //    Email = DefaultUserEmail,
+            //    NormalizedEmail = DefaultUserEmail.ToUpperInvariant(),
+            //    EmailConfirmed = true,
+            //    PasswordHash = DefaultUserPasswordHash,
+            //    SecurityStamp = DefaultSecurityStamp,
+            //    ConcurrencyStamp = DefaultConcurrencyStamp
+            //});
+
+            // Seed a default admin user inline (email: admin@cartrader.com, password: Admin123!)
+            // Using fixed identifiers so EF Core migrations remain stable.
+            var adminId = "2a1b3c4d-5e6f-4789-abcd-0123456789ab";
+            var adminUser = new IdentityUser
             {
-                Id = DefaultUserId,
-                UserName = DefaultUserEmail,
-                NormalizedUserName = DefaultUserEmail.ToUpper(),
-                Email = DefaultUserEmail,
-                NormalizedEmail = DefaultUserEmail.ToUpper(),
+                Id = adminId,
+                UserName = "admin@cartrader.com",
+                NormalizedUserName = "ADMIN@CARTRADER.COM",
+                Email = "admin@cartrader.com",
+                NormalizedEmail = "ADMIN@CARTRADER.COM",
                 EmailConfirmed = true,
-                PasswordHash = DefaultUserPasswordHash,
-                SecurityStamp = DefaultSecurityStamp,
-                ConcurrencyStamp = DefaultConcurrencyStamp
-            });
+                SecurityStamp = "a1b2c3d4-e5f6-4789-abcd-000000000001",
+                ConcurrencyStamp = "c1d2e3f4-1234-4789-abcd-000000000002"
+            };
+
+            // Compute password hash for the seeded user
+            var hasher = new PasswordHasher<IdentityUser>();
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123!");
+
+            builder.Entity<IdentityUser>().HasData(adminUser);
 
             builder.Entity<Category>().HasData
             (
@@ -80,7 +101,7 @@ namespace CarTrader.Data
                     FuelType = FuelType.Petrol,
                     TransmissionType = TransmissionType.Automatic,
                     Condition = VehicleCondition.Good,
-                    ImageUrl = "https://example.com/images/toyota-camry-2020.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/toyota/camry/2020/oem/2020_toyota_camry_sedan_trd_fq_oem_1_500.jpg",
                     IsDeleted = false,
                     SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                     CategoryId = 1
@@ -99,7 +120,7 @@ namespace CarTrader.Data
                     FuelType = FuelType.Petrol,
                     TransmissionType = TransmissionType.Manual,
                     Condition = VehicleCondition.Excellent,
-                    ImageUrl = "https://example.com/images/honda-civic-2019.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/honda/civic/2019/oem/2019_honda_civic_4dr-hatchback_sport-touring_fq_oem_6_500.jpg",
                     IsDeleted = false,
                     SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                     CategoryId = 1
@@ -118,7 +139,7 @@ namespace CarTrader.Data
                     FuelType = FuelType.Gas,
                     TransmissionType = TransmissionType.Automatic,
                     Condition = VehicleCondition.LikeNew,
-                    ImageUrl = "https://example.com/images/ford-f150-2021.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/ford/f-150/2021/oem/2021_ford_f-150_crew-cab-pickup_raptor_fq_oem_1_500.jpg",
                     IsDeleted = false,
                     SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                     CategoryId = 3
@@ -137,7 +158,7 @@ namespace CarTrader.Data
                     FuelType = FuelType.Petrol,
                     TransmissionType = TransmissionType.Automatic,
                     Condition = VehicleCondition.Good,
-                    ImageUrl = "https://example.com/images/chevrolet-tahoe-2020.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/chevrolet/tahoe/2026/oem/2026_chevrolet_tahoe_4dr-suv_z71_fq_oem_2_500.jpg",
                     IsDeleted = false,
                     SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                     CategoryId = 2
@@ -156,7 +177,7 @@ namespace CarTrader.Data
                     FuelType = FuelType.Petrol,
                     TransmissionType = TransmissionType.SemiAutomatic,
                     Condition = VehicleCondition.LikeNew,
-                    ImageUrl = "https://example.com/images/bmw-m4-2021.jpg",
+                    ImageUrl = "https://media.ed.edmunds-media.com/bmw/m4/2026/oem/2026_bmw_m4_coupe_competition-xdrive_fq_oem_1_500.jpg",
                     IsDeleted = false,
                     SellerId = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                     CategoryId = 4
