@@ -21,7 +21,7 @@ namespace CarTrader.Web.Controllers
 
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> AllVehicles()
         {
             string? userId = GetUserId();
 

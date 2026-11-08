@@ -64,6 +64,21 @@ namespace CarTrader.Data.Migrations
                         {
                             Id = 5,
                             Name = "Convertible"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Hatchback"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Van"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Wagon"
                         });
                 });
 
@@ -367,19 +382,19 @@ namespace CarTrader.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2a1b3c4d-5e6f-4789-abcd-0123456789ab",
+                            Id = "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1d2e3f4-1234-4789-abcd-000000000002",
+                            ConcurrencyStamp = "dc9daa79-d4fd-4645-9c97-e95fdcbcf99e",
                             Email = "admin@cartrader.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@CARTRADER.COM",
-                            NormalizedUserName = "ADMIN@CARTRADER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFSRN8lEbQb3G0dJ+VJV+3pY3881Gwi9FK4kvg/37iOcpZ3ewJ05uemp0eIm7lXneA==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AL4K476eDlIanb+PJcxXLNQNn7rt52F/p62Bq+LraYHNoIF8klSx+BoGFjq62uUPNQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1b2c3d4-e5f6-4789-abcd-000000000001",
+                            SecurityStamp = "eeac63cc-0360-415c-8fd7-2130464304a5",
                             TwoFactorEnabled = false,
-                            UserName = "admin@cartrader.com"
+                            UserName = "admin"
                         });
                 });
 

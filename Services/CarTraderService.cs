@@ -54,12 +54,12 @@ namespace CarTrader.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<IndexViewModel>> GetAllVehiclesAsync(string? userId)
+        public async Task<IEnumerable<AllVehiclesViewModel>> GetAllVehiclesAsync(string? userId)
         {
             var vehicles = await _dbContext.Vehicles
                 .Where(v => !v.IsDeleted)
                 .Include(v => v.Category)
-                .Select(v => new IndexViewModel
+                .Select(v => new AllVehiclesViewModel
                 {
                     Id = v.Id,
                     Make = v.Make,

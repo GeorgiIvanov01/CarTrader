@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarTrader.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -236,7 +236,7 @@ namespace CarTrader.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2a1b3c4d-5e6f-4789-abcd-0123456789ab", 0, "c1d2e3f4-1234-4789-abcd-000000000002", "admin@cartrader.com", true, false, null, "ADMIN@CARTRADER.COM", "ADMIN@CARTRADER.COM", "AQAAAAIAAYagAAAAEFSRN8lEbQb3G0dJ+VJV+3pY3881Gwi9FK4kvg/37iOcpZ3ewJ05uemp0eIm7lXneA==", null, false, "a1b2c3d4-e5f6-4789-abcd-000000000001", false, "admin@cartrader.com" });
+                values: new object[] { "df1c3a0f-1234-4cde-bb55-d5f15a6aabcd", 0, "dc9daa79-d4fd-4645-9c97-e95fdcbcf99e", "admin@cartrader.com", true, false, null, "ADMIN@CARTRADER.COM", "ADMIN", "AL4K476eDlIanb+PJcxXLNQNn7rt52F/p62Bq+LraYHNoIF8klSx+BoGFjq62uUPNQ==", null, false, "eeac63cc-0360-415c-8fd7-2130464304a5", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -247,7 +247,10 @@ namespace CarTrader.Data.Migrations
                     { 2, "SUV" },
                     { 3, "Truck" },
                     { 4, "Coupe" },
-                    { 5, "Convertible" }
+                    { 5, "Convertible" },
+                    { 6, "Hatchback" },
+                    { 7, "Van" },
+                    { 8, "Wagon" }
                 });
 
             migrationBuilder.InsertData(

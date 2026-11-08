@@ -8,7 +8,7 @@ namespace CarTrader.Services.Contracts
 {
     public interface ICarTraderService
     {
-        Task<IEnumerable<IndexViewModel>> GetAllVehiclesAsync(string? userId);
+        Task<IEnumerable<AllVehiclesViewModel>> GetAllVehiclesAsync(string? userId);
 
         Task<DetailsViewModel> GetVehicleDetailsByIdAsync(int vehicleId);
 

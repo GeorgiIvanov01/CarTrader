@@ -1,6 +1,6 @@
 ﻿namespace CarTrader.Web.ViewModels.VehicleViewModels
 {
-    public class IndexViewModel
+    public class AllVehiclesViewModel
     {
         public int Id { get; set; }
 

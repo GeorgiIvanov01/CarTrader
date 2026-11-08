@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CarTrader.Data.Models;
 using CarTrader.Data.Enums;
 using Microsoft.AspNetCore.Identity;
+using static CarTrader.GCommon.InitialIdentitySeedConstants;
 // Identity seed constants are provided inline below for the default admin user.
 
 namespace CarTrader.Data
@@ -42,39 +43,39 @@ namespace CarTrader.Data
                 .HasForeignKey(v => v.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //builder.Entity<IdentityUser>().HasData(new IdentityUser
-            //{
-            //    Id = DefaultUserId,
-            //    UserName = DefaultUserEmail,
-            //    NormalizedUserName = DefaultUserEmail.ToUpperInvariant(),
-            //    Email = DefaultUserEmail,
-            //    NormalizedEmail = DefaultUserEmail.ToUpperInvariant(),
-            //    EmailConfirmed = true,
-            //    PasswordHash = DefaultUserPasswordHash,
-            //    SecurityStamp = DefaultSecurityStamp,
-            //    ConcurrencyStamp = DefaultConcurrencyStamp
-            //});
+            builder.Entity<IdentityUser>().HasData(new IdentityUser
+            {
+                Id = DefaultUserId,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = DefaultUserEmail,
+                NormalizedEmail = DefaultUserEmail.ToUpperInvariant(),
+                EmailConfirmed = true,
+                PasswordHash = DefaultUserPasswordHash,
+                SecurityStamp = DefaultSecurityStamp,
+                ConcurrencyStamp = DefaultConcurrencyStamp
+            });
 
             // Seed a default admin user inline (email: admin@cartrader.com, password: Admin123!)
             // Using fixed identifiers so EF Core migrations remain stable.
-            var adminId = "2a1b3c4d-5e6f-4789-abcd-0123456789ab";
-            var adminUser = new IdentityUser
-            {
-                Id = adminId,
-                UserName = "admin@cartrader.com",
-                NormalizedUserName = "ADMIN@CARTRADER.COM",
-                Email = "admin@cartrader.com",
-                NormalizedEmail = "ADMIN@CARTRADER.COM",
-                EmailConfirmed = true,
-                SecurityStamp = "a1b2c3d4-e5f6-4789-abcd-000000000001",
-                ConcurrencyStamp = "c1d2e3f4-1234-4789-abcd-000000000002"
-            };
+            //var adminId = "2a1b3c4d-5e6f-4789-abcd-0123456789ab";
+            //var adminUser = new IdentityUser
+            //{
+            //    Id = adminId,
+            //    UserName = "admin@cartrader.com",
+            //    NormalizedUserName = "ADMIN@CARTRADER.COM",
+            //    Email = "admin@cartrader.com",
+            //    NormalizedEmail = "ADMIN@CARTRADER.COM",
+            //    EmailConfirmed = true,
+            //    SecurityStamp = "a1b2c3d4-e5f6-4789-abcd-000000000001",
+            //    ConcurrencyStamp = "c1d2e3f4-1234-4789-abcd-000000000002"
+            //};
 
-            // Compute password hash for the seeded user
-            var hasher = new PasswordHasher<IdentityUser>();
-            adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123!");
+            //// Compute password hash for the seeded user
+            //var hasher = new PasswordHasher<IdentityUser>();
+            //adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123!");
 
-            builder.Entity<IdentityUser>().HasData(adminUser);
+            //builder.Entity<IdentityUser>().HasData(adminUser);
 
             builder.Entity<Category>().HasData
             (
@@ -82,7 +83,10 @@ namespace CarTrader.Data
                 new Category { Id = 2, Name = "SUV" },
                 new Category { Id = 3, Name = "Truck" },
                 new Category { Id = 4, Name = "Coupe" },
-                new Category { Id = 5, Name = "Convertible" }
+                new Category { Id = 5, Name = "Convertible" },
+                new Category { Id = 6, Name = "Hatchback" },
+                new Category { Id = 7, Name = "Van" },
+                new Category { Id = 8, Name = "Wagon" }
             );
 
             builder.Entity<Vehicle>().HasData
