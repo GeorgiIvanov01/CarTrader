@@ -17,7 +17,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 {
-    //TODO: Change the options in production.
+    //In production, you should require confirmed accounts and stronger password policies for better security.
+    //I will leave these settings as they are for now to make it easier to test the application without having to confirm accounts or use strong passwords.
     options.User.RequireUniqueEmail = true;
 
     options.SignIn.RequireConfirmedAccount = false;

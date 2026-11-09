@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CarTrader.Data.Models;
 using CarTrader.Data.Enums;
 using Microsoft.AspNetCore.Identity;
-using static CarTrader.GCommon.InitialIdentitySeedConstants;
-// Identity seed constants are provided inline below for the default admin user.
+using static CarTrader.Data.SeedConstants.SeedConstants;
 
 namespace CarTrader.Data
 {
@@ -46,36 +45,16 @@ namespace CarTrader.Data
             builder.Entity<IdentityUser>().HasData(new IdentityUser
             {
                 Id = DefaultUserId,
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
+                UserName = DefaultUserName,
+                NormalizedUserName = DefaultNormalizedUserName,
                 Email = DefaultUserEmail,
-                NormalizedEmail = DefaultUserEmail.ToUpperInvariant(),
+                NormalizedEmail = DefaultNormalizedUserEmail,
                 EmailConfirmed = true,
                 PasswordHash = DefaultUserPasswordHash,
                 SecurityStamp = DefaultSecurityStamp,
                 ConcurrencyStamp = DefaultConcurrencyStamp
             });
 
-            // Seed a default admin user inline (email: admin@cartrader.com, password: Admin123!)
-            // Using fixed identifiers so EF Core migrations remain stable.
-            //var adminId = "2a1b3c4d-5e6f-4789-abcd-0123456789ab";
-            //var adminUser = new IdentityUser
-            //{
-            //    Id = adminId,
-            //    UserName = "admin@cartrader.com",
-            //    NormalizedUserName = "ADMIN@CARTRADER.COM",
-            //    Email = "admin@cartrader.com",
-            //    NormalizedEmail = "ADMIN@CARTRADER.COM",
-            //    EmailConfirmed = true,
-            //    SecurityStamp = "a1b2c3d4-e5f6-4789-abcd-000000000001",
-            //    ConcurrencyStamp = "c1d2e3f4-1234-4789-abcd-000000000002"
-            //};
-
-            //// Compute password hash for the seeded user
-            //var hasher = new PasswordHasher<IdentityUser>();
-            //adminUser.PasswordHash = hasher.HashPassword(adminUser, "Admin123!");
-
-            //builder.Entity<IdentityUser>().HasData(adminUser);
 
             builder.Entity<Category>().HasData
             (

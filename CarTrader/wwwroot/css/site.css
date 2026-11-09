@@ -1,51 +1,4 @@
-/*html {
-  font-size: 14px;
-}
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
-body {
-    background-image: url('/images/background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-}
-body {
-    background: linear-gradient( rgba(211, 211, 211, 0.45)), url('/images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-}
-*/
 /* =========================================================
    CARTRADER - GLOBAL DESIGN SYSTEM
 ========================================================= */
@@ -297,7 +250,7 @@ a {
     }
 
 /* =========================================================
-   HOMEPAGE HERO
+   HOMEPAGE
 ========================================================= */
 
 .hero-section {
@@ -524,7 +477,7 @@ a {
     }
 
 /* =========================================================
-   CREATE AND EDIT FORMS
+   CREATE AND EDIT
 ========================================================= */
 
 .form-container {
@@ -625,7 +578,7 @@ textarea.form-control {
 }
 
 /* =========================================================
-   VEHICLE DETAILS
+   DETAILS
 ========================================================= */
 
 .details-container {
@@ -730,7 +683,7 @@ textarea.form-control {
 }
 
 /* =========================================================
-   DELETE CONFIRMATION
+   DELETE
 ========================================================= */
 
 .delete-container {
@@ -897,7 +850,7 @@ textarea.form-control {
 }
 
 /* =========================================================
-   MY VEHICLES DASHBOARD
+   MY VEHICLES
 ========================================================= */
 
 .my-vehicle-actions {

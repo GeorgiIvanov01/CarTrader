@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using CarTrader.Web.ViewModels.VehicleViewModels;
+﻿using CarTrader.Web.ViewModels.VehicleViewModels;
 
 namespace CarTrader.Services.Contracts
 {
@@ -33,8 +29,5 @@ namespace CarTrader.Services.Contracts
         Task EditVehicleAsync(EditViewModel model, string userId);
 
         Task<bool> IsVehicleOwnerAsync(int vehicleId, string userId);
-
-        //Task<bool> IsVehicleSavedAsync(int vehicleId, string userId);
-
     }
 }

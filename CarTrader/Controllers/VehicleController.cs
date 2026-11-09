@@ -1,10 +1,7 @@
-﻿using CarTrader.Data.Models;
-using CarTrader.Services.Contracts;
+﻿using CarTrader.Services.Contracts;
 using CarTrader.Web.ViewModels.VehicleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarTrader.Web.Controllers
 {
@@ -222,14 +219,5 @@ namespace CarTrader.Web.Controllers
 
             return View(vehicle);
         }
-
-        //public async Task<IActionResult> MyVehicles()
-        //{
-        //    string? userId = GetUserId();
-
-        //    var vehicles = await _carTraderService.GetVehiclesByUserIdAsync(userId);
-
-        //    return View(vehicles);
-        //}
     }
 }

@@ -314,17 +314,5 @@ namespace CarTrader.Services
             return await _dbContext.Vehicles
                 .AnyAsync(v => v.Id == vehicleId && v.SellerId == userId);
         }
-
-
-        //public async Task<bool> IsVehicleSavedAsync(int vehicleId, string userId)
-        //{
-        //    if (string.IsNullOrEmpty(userId))
-        //    {
-        //        return false;
-        //    }
-
-        //    return await _dbContext.UserVehicles
-        //        .AnyAsync(uv => uv.VehicleId == vehicleId && uv.UserId == userId);
-        //}
     }
 }

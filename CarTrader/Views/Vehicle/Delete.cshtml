@@ -1,25 +1,3 @@
-@* @model DeleteViewModel
-
-@{
-    ViewData["Title"] = "Delete Vehicle";
-}
-
-<h1>Delete Vehicle</h1>
-
-<div class="card mb-3">
-    <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Make @Model.Model" />
-    <div class="card-body">
-        <h5 class="card-title">@Model.Make @Model.Model (@Model.Year)</h5>
-        <p class="card-text">@Model.Description</p>
-        <p class="card-text"><strong>Price:</strong> @Model.Price.ToString("C")</p>
-    </div>
-</div>
-
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-secondary">Cancel</a>
-</form> *@
 @model DeleteViewModel
 
 @{

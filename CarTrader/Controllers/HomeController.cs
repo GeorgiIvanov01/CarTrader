@@ -11,6 +11,11 @@ namespace CarTrader.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Vehicle");
+            }
+
             return View();
         }
 
