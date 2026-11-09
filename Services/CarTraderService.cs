@@ -237,7 +237,7 @@ namespace CarTrader.Services
 
             if (vehicle == null)
             {
-                throw new ArgumentException($"Vehicle not found.");
+                throw new ArgumentException("Vehicle not found.");
             }
 
             if (vehicle.SellerId != userId)
@@ -279,7 +279,7 @@ namespace CarTrader.Services
 
             if (vehicle == null)
             {
-                throw new ArgumentException($"Vehicle not found.");
+                throw new ArgumentException("Vehicle not found.");
             }
 
             if (vehicle.SellerId != userId)

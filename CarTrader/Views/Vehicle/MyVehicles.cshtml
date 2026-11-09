@@ -1,4 +1,4 @@
-@model IEnumerable<UserVehicleViewModel>
+@* @model IEnumerable<UserVehicleViewModel>
 
 @{
     ViewData["Title"] = "My Vehicles";
@@ -38,5 +38,98 @@ else
                 </div>
             </div>
         }
+    </div>
+} *@
+@model IEnumerable<UserVehicleViewModel>
+
+@{
+    ViewData["Title"] = "My Vehicles";
+}
+
+<div class="page-header page-header-with-action">
+
+    <div>
+        <span class="section-eyebrow">YOUR SELLER DASHBOARD</span>
+        <h1>My Vehicles</h1>
+        <p>Manage and keep track of your vehicle listings.</p>
+    </div>
+
+    <a asp-controller="Vehicle" asp-action="Create" class="btn btn-accent"> <i class="fas fa-plus me-2"></i> Create New Vehicle </a>
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">
+
+        <i class="fas fa-car-side"></i>
+
+        <h3>No Vehicles Listed</h3>
+
+        <p>You haven't created any vehicle listings yet.</p>
+
+        <a asp-controller="Vehicle" asp-action="Create" class="btn btn-accent"> <i class="fas fa-plus me-2"></i> Create Your First Listing </a>
+    </div>
+}
+else
+{
+    <div class="vehicle-grid">
+
+        @foreach (var v in Model)
+        {
+            <div class="vehicle-card">
+
+                <div class="vehicle-image-wrapper">
+
+                    <img src="@v.ImageUrl"
+                         class="vehicle-image"
+                         alt="@v.Make @v.Model" />
+
+                </div>
+
+                <div class="vehicle-card-body">
+
+                    <h5>@v.Make @v.Model (@v.Year)</h5>
+
+                    <div class="vehicle-price"> @v.Price.ToString("C", new System.Globalization.CultureInfo("en-GB")) </div>
+
+                    <div class="vehicle-specs">
+
+                        <span>
+                            <i class="fas fa-road"></i>
+                            @v.Mileage km
+                        </span>
+
+                        <span>
+                            <i class="fas fa-cogs"></i>
+                            @v.EngineSize cc
+                        </span>
+
+                    </div>
+
+                    <div class="my-vehicle-actions">
+
+                        <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@v.Id" class="btn btn-details"> Details </a>
+
+                        <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@v.Id" class="btn btn-outline-secondary"> <i class="fas fa-edit"></i> Edit </a>
+
+                        <form asp-controller="Vehicle"
+                              asp-action="DeleteConfirmed"
+                              method="post"
+                              class="my-vehicle-delete-form">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="@v.Id" />
+
+                            <button type="submit" class="btn btn-danger"> <i class="fas fa-trash"></i> Delete </button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
     </div>
 }

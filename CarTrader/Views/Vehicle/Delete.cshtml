@@ -1,4 +1,4 @@
-@model DeleteViewModel
+@* @model DeleteViewModel
 
 @{
     ViewData["Title"] = "Delete Vehicle";
@@ -19,4 +19,66 @@
     <input type="hidden" asp-for="Id" />
     <button type="submit" class="btn btn-danger">Delete</button>
     <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-secondary">Cancel</a>
-</form>
+</form> *@
+@model DeleteViewModel
+
+@{
+    ViewData["Title"] = "Delete Vehicle";
+}
+
+<div class="page-header">
+    <div>
+        <span class="section-eyebrow">MANAGE YOUR LISTING</span>
+        <h1>Delete Vehicle</h1>
+        <p>Review the vehicle before confirming deletion.</p>
+    </div>
+</div>
+
+<div class="delete-container">
+
+    <div class="delete-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+
+        <div>
+            <h4>Are you sure?</h4>
+            <p>You are about to delete this vehicle listing.</p>
+        </div>
+    </div>
+
+    <div class="delete-vehicle-card">
+
+        <div class="delete-image-wrapper">
+
+            <img src="@Model.ImageUrl"
+                 alt="@Model.Make @Model.Model" />
+
+        </div>
+
+        <div class="delete-vehicle-info">
+
+            <span class="section-eyebrow">VEHICLE TO DELETE</span>
+
+            <h3>@Model.Make @Model.Model (@Model.Year)</h3>
+
+            <div class="delete-price">
+                @Model.Price.ToString("C")
+            </div>
+
+            <p>@Model.Description</p>
+
+        </div>
+
+    </div>
+
+    <form asp-action="DeleteConfirmed" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger"> <i class="fas fa-trash me-2"></i> Confirm Delete </button>
+            <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-outline-secondary"> Cancel </a>
+        </div>
+
+    </form>
+
+</div>

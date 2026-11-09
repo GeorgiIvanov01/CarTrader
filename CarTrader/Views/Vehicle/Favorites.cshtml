@@ -1,4 +1,4 @@
-@model IEnumerable<FavoriteViewModel>
+@* @model IEnumerable<FavoriteViewModel>
 @{
     ViewData["Title"] = "Favorites";
 }
@@ -51,4 +51,91 @@ else
     <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-primary mt-3">
         <i class="fas fa-arrow-left"></i> Back to Vehicles
     </a>
+</div> *@
+@model IEnumerable<FavoriteViewModel>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<div class="page-header">
+
+    <div>
+        <span class="section-eyebrow">YOUR SAVED COLLECTION</span>
+        <h1><i class="fas fa-heart favorite-heading-icon"></i> My Favorites</h1>
+        <p>Keep track of the vehicles you're interested in.</p>
+    </div>
+
+</div>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="empty-state">
+
+        <i class="far fa-heart"></i>
+
+        <h3>No Favorites Yet</h3>
+
+        <p>You haven't saved any vehicles to your favorites.</p>
+
+        <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-accent">  Explore Vehicles <i class="fas fa-arrow-right ms-2"></i> </a>
+
+    </div>
+}
+else
+{
+    <div class="favorites-list">
+
+        @foreach (var vehicle in Model)
+        {
+            <div class="favorite-card">
+
+                <div class="favorite-image-wrapper">
+
+                    @if (!string.IsNullOrEmpty(vehicle.ImageUrl))
+                    {
+                        <img src="@vehicle.ImageUrl"
+                             alt="@vehicle.Make @vehicle.Model" />
+                    }
+                    else
+                    {
+                        <img src="~/images/default-image.jpg"
+                             alt="No Image Available" />
+                    }
+
+                </div>
+
+                <div class="favorite-info">
+
+                    <h4>@vehicle.Make @vehicle.Model</h4>
+
+                    <p>
+                        <i class="fas fa-tag me-2"></i>
+                        @vehicle.Category
+                    </p>
+
+                </div>
+
+                <div class="favorite-actions">
+
+                    <a asp-controller="Vehicle" asp-action="Details" asp-route-id="@vehicle.Id" class="btn btn-details"> <i class="fas fa-eye me-2"></i>  Details </a>
+
+                    <form asp-controller="Vehicle"
+                          asp-action="Remove"
+                          asp-route-id="@vehicle.Id"
+                          method="post">
+
+                        <button type="submit" class="btn btn-danger"> <i class="fas fa-trash me-2"></i> Remove </button>
+                    </form>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+
+<div class="back-link-container">
+    <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-outline-secondary"> <i class="fas fa-arrow-left me-2"></i> Back to Vehicles </a>
 </div>

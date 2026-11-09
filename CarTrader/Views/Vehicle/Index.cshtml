@@ -1,0 +1,122 @@
+﻿@* @{
+    ViewData["Title"] = "Welcome to CarTrader";
+}
+
+<style>
+    .welcome-container {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(135deg, #171c24, #293544);
+        color: white;
+        border-radius: 16px;
+        padding: 60px 20px;
+        margin-top: 30px;
+    }
+
+    .welcome-content {
+        max-width: 700px;
+    }
+
+        .welcome-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+            .welcome-content h1 span {
+                color: #f0ad4e;
+            }
+
+        .welcome-content p {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+    .browse-btn {
+        background-color: #f0ad4e;
+        color: #171c24;
+        padding: 14px 35px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: 0.3s ease;
+        display: inline-block;
+    }
+
+        .browse-btn:hover {
+            background-color: #e69b32;
+            color: #171c24;
+            transform: translateY(-3px);
+        }
+
+    @@media (max-width: 576px) {
+        .welcome-content h1 {
+            font-size: 2.5rem;
+        }
+
+        .welcome-content p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="welcome-container">
+        <div class="welcome-content">
+            <h1>Welcome to <span>CarTrader</span></h1>
+
+            <p>
+                Find your next car with ease.
+                Explore a wide range of vehicles and discover the perfect car for your needs.
+                Your next journey starts here.
+            </p>
+
+            <a asp-controller="Vehicle"
+               asp-action="AllVehicles"
+               class="browse-btn">
+                Browse Vehicles &rarr;
+            </a>
+        </div>
+    </div>
+</div> *@
+@{
+    ViewData["Title"] = "Welcome to CarTrader";
+}
+
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            <i class="fas fa-car"></i>
+            YOUR NEXT JOURNEY STARTS HERE
+        </span>
+
+        <h1>
+            Find Your Perfect
+            <span>Drive.</span>
+        </h1>
+
+        <p>
+            Discover quality vehicles, compare your options,
+            and find the perfect car for your next adventure.
+        </p>
+
+        <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-accent hero-button"> Browse Vehicles <i class="fas fa-arrow-right ms-2"></i> </a>
+
+    </div>
+
+    <div class="hero-bottom">
+        <span>DRIVE YOUR DREAM</span>
+        <span>DISCOVER. COMPARE. DRIVE.</span>
+    </div>
+
+</section>

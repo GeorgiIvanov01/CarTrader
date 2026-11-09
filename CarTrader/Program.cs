@@ -64,7 +64,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Vehicle}/{action=AllVehicles}/{id?}")
+    pattern: "{controller=Vehicle}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.MapRazorPages()

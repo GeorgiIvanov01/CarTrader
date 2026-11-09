@@ -21,7 +21,7 @@
         public const int VehicleMileageMaxValue = 1_000_000;
         public const int VehicleMileageMinValue = 0;
 
-        public const int VehicleEngineSizeMaxValue = 3000;
+        public const int VehicleEngineSizeMaxValue = 10000;
         public const int VehicleEngineSizeMinValue = 0;
 
 

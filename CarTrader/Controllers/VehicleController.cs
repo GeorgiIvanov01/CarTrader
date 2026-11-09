@@ -19,6 +19,11 @@ namespace CarTrader.Web.Controllers
             _carTraderService = carTraderService;
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
+        {
+            return View("Index");
+        }
 
         [AllowAnonymous]
         public async Task<IActionResult> AllVehicles()
@@ -54,7 +59,7 @@ namespace CarTrader.Web.Controllers
             }
 
             await _carTraderService.AddVehicleAsync(viewModel, userId);
-            return RedirectToAction("Index");
+            return RedirectToAction("AllVehicles");
         }
 
         public async Task<IActionResult> MyVehicles (string Id)
