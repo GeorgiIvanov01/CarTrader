@@ -1,8 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to CarTrader";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="hero-label">
+            <i class="fas fa-car"></i>
+            YOUR NEXT JOURNEY STARTS HERE
+        </span>
+
+        <h1>
+            Find Your Perfect
+            <span>Drive.</span>
+        </h1>
+
+        <p>
+            Discover quality vehicles, compare your options,
+            and find the perfect car for your next adventure.
+        </p>
+
+        <a asp-controller="Vehicle" asp-action="AllVehicles" class="btn btn-accent hero-button"> Browse Vehicles <i class="fas fa-arrow-right ms-2"></i> </a>
+
+    </div>
+
+    <div class="hero-bottom">
+        <span>DRIVE YOUR DREAM</span>
+        <span>DISCOVER. COMPARE. DRIVE.</span>
+    </div>
+
+</section>
